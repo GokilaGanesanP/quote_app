@@ -1,0 +1,28 @@
+.row{
+    margin-top: 2%;
+}
+.btn-info {
+    color: white;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;  
+    align-items: center;     
+    height: 30vh;            
+    margin: 0;               
+}
+
+
+.center-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+
+input[readonly] {
+    pointer-events: none; /* Prevents the select from being clicked */
+    background-color: #e9ecef; /* Light background to indicate it's read-only */
+  }

@@ -1,0 +1,120 @@
+<div class="container-xl">
+    <div class="table-responsive">
+      <div class="table-wrapper">
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4><b>New Quote Information</b></h4>
+            </div>
+            <div class="col-sm-6">
+              <a href="#" routerLink="" class="btn btn-info back"><i class='fas fa-arrow-circle-left'></i>
+                 Back</a>
+            </div>
+          </div>
+        </div>
+  
+        <div>
+          <form [formGroup]="QuoteForm" (ngSubmit)="saveQuotationInfo()">
+  
+          <div class="table-content">
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label for="quotename" class="p-t-b-10">Quote Name<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input id="quotename" class="form form-control" type="text" formControlName="quotename">
+              </div>
+  
+            </div>
+  
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label for="custname" class="p-t-b-10">Customer Name<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input id="custname" (focusout)="CheckExistsCust()" class="form form-control" type="text" formControlName="custname">
+              </div>
+  
+            </div>
+  
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label for="custtype" class="p-t-b-10">Customer Type<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" id="custtype" class="form form-control" formControlName="custtype" [readOnly]="true">
+                
+              </div>
+  
+  
+            </div>
+  
+  
+            <div class="form-group p-10 row" *ngIf="isVisible">
+              <div class="col-sm-3">
+                <label for="serialno" class="p-t-b-10">Serial No<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+
+                <input id="custid" type="hidden" class="form form-control" formControlName="custid">
+
+                <input id="serialno" type="number" class="form form-control" formControlName="serialno">
+              </div>
+            </div>
+  
+            <div class="form-group p-10 row" *ngIf="isVisible">
+              <div class="col-sm-3">
+                <label for="planno" class="p-t-b-10">Plan No<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input id="planno" type="text" class="form form-control" formControlName="planno">
+              </div>
+            </div>
+
+            <div class="form-group p-10 row">
+                <div class="col-sm-3">
+                  <label for="warantyterms" class="p-t-b-10">Warranty Terms<span class="requiredStar">*</span></label>
+                </div>
+                <div class="col-sm-9">
+                  <select id="warantyterms" class="form form-control" formControlName="warantyterms">
+                    <option value='' selected disabled>-Select-</option>
+                      <option value='12'>12</option>
+                      <option value='24'>24</option>
+                      <option value='36'>36</option>
+                      <option value='46'>46</option>
+                  </select>
+                </div>
+              </div>
+  
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label for="warantyhrs" class="p-t-b-10">Warranty Hours<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <select id="warantyhrs" class="form form-control" formControlName="warantyhrs">
+                    <option value='' selected disabled>-Select-</option>
+                    <option value='500'>500</option>
+                    <option value='1000'>1000</option>
+                    <option value='1500'>1500</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="center-container">            
+                <button type="submit" class="center-button btn btn-info">Submit</button>
+            </div>
+
+  
+  
+  
+          </div>
+  
+        </form>
+         
+        
+      </div>
+    </div>
+  </div>
+
+
+  
