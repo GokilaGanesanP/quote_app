@@ -9,15 +9,15 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-
-
+  private credentials : any;
   private apiUrl = 'http://127.0.0.1:8000/api';  
   private token: string | null = null;
-  private credentials =  { email: "gokila@gmail.com", password: "p@ssw0rd" };
+  //private credentials =  { email: "gokila@gmail.com", password: "p@ssw0rd" };
 
   constructor(private http: HttpClient) {}
 
-  login(): Observable<any> {
+  login(formcredentials : any): Observable<any> {
+    this.credentials = {email: formcredentials.inputLogin , password:formcredentials.inputPassword};
     return this.http.post(`${this.apiUrl}/login`, this.credentials);
   }
 

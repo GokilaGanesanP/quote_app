@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiService } from '../api.service';
 import { AuthService } from '../auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-view-quote',
@@ -13,62 +14,46 @@ import { AuthService } from '../auth.service';
   styleUrl: './view-quote.component.css',
   providers: [    
     ApiService,
-    AuthService,   
+    AuthService,
+    ToastrService,
   ],
  
 })
-export class ViewQuoteComponent{
 
-  constructor(private apiService: ApiService, private authService: AuthService, private router: Router) {}
+export class ViewQuoteComponent implements OnInit{
 
+  constructor(private apiService: ApiService, private authService: AuthService, 
+    private router: Router, private toastr: ToastrService){}
+  
   QuoteList: any[] = [];  
   token: any;
   showTable: boolean = false;
 
 
-  ViewQuote() {
-    this.login();
-  }
+    ngOnInit(): void {
+      this.token = this.authService.getToken();
+      this.loadQuoteInfo(this.token);      
+    }
 
-  login() {
-    this.showTable = !this.showTable;
-    this.authService.login().subscribe(
-      (response) => {       
-       this.authService.saveToken(response.authorisation.token);  
-       this.token = this.authService.getToken();
-       this.loadQuoteInfo(this.token);       
-      },
-      (error) => {
-        console.log('Login failed', error);
-      }
-    );
-  }
-
-    // Method to fetch the products (protected API)
+ // Method to fetch the products (protected API)
     loadQuoteInfo(token : any): void {
       this.apiService.getData(token).subscribe(response => {
         this.QuoteList = response.message;
-        console.log(response);
-      }, error => {
-        console.log('Error:', error);
+        this.showTable = !this.showTable;
+      }, error => {        
+        this.toastr.error(error.error.message, 'Error');
+        this.showTable = this.showTable;
       });
 
     }
+
+
+
 
     AddQuote(){
       this.router.navigate(['addquote']);
     }
 
-  
-
- 
-
-
- 
-
-
-  
- 
   
  
 }
